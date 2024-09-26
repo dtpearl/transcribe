@@ -4,9 +4,8 @@ import whisper
 MEDIA_FOLDER = 'media'
 TRANSCRIPTION_SAVE_LOCATION = 'output'
 AUDIO_FILE_TO_TRANSCRIBE = "sample-0.mp3"
-VIDEO_FILE_TO_TRANSCRIBE = f"{MEDIA_FOLDER}/video-test.mp4"
-
-FILE_TO_TRANSCRIBE = AUDIO_FILE_TO_TRANSCRIBE
+VIDEO_FILE_TO_TRANSCRIBE = "01-Module 1 - Funnel Rx - The Five Principles Of Funnel Building from Cathy Olson on Vimeo.mp4"
+FILE_TO_TRANSCRIBE = VIDEO_FILE_TO_TRANSCRIBE
 FILE_TO_TRANSCRIBE_WITH_FILE_PATH = f"{MEDIA_FOLDER}/{FILE_TO_TRANSCRIBE}"
 # Split the file name and extension
 file_name, file_extension = os.path.splitext(FILE_TO_TRANSCRIBE)
