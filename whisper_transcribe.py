@@ -14,34 +14,43 @@ MEDIA_FOLDER = 'media'
 TRANSCRIPTION_SAVE_LOCATION = 'output'
 AUDIO_FILE_TO_TRANSCRIBE = "sample-0.mp3"
 VIDEO_FILE_TO_TRANSCRIBE = "02-Module 2 - Funnel Rx - Funnel Strategy Blueprints for 6 Common Business Models from Cathy Olson on Vimeo(1).mp4"
-FILE_TO_TRANSCRIBE = VIDEO_FILE_TO_TRANSCRIBE
-FILE_TO_TRANSCRIBE_WITH_FILE_PATH = f"{MEDIA_FOLDER}/{FILE_TO_TRANSCRIBE}"
-# Split the file name and extension
-file_name, file_extension = os.path.splitext(FILE_TO_TRANSCRIBE)
-
-# Save the file name in a variable
-transcription_file_name = f"{file_name}.txt"
-
+VIDEO_FILES_TO_TRANSCRIBE = [
+    "03-Module 3 - Funnel Rx - Periodic Table of Funnelbuilding Elements from Cathy Olson on Vimeo.mp4",
+    "04-Module 4 - Funnel Rx - Funnel Diagnostics from Cathy Olson on Vimeo.mp4",
+    "04-Module 4 - Funnel Rx - Funnel Diagnostics from Cathy Olson on Vimeo(1).mp4"
+    ]
 # Load the model (small, medium, large, etc.)
 model = whisper.load_model("small")
+for file in VIDEO_FILES_TO_TRANSCRIBE:
+  print(f"Start transcribing: {file}")
+  # Print the start time for each file
+  loop_start_time = time.time()
+  print(f"Start Time: {time.strftime('%H:%M:%S', time.localtime(loop_start_time))}") 
+  FILE_TO_TRANSCRIBE = file
+  FILE_TO_TRANSCRIBE_WITH_FILE_PATH = f"{MEDIA_FOLDER}/{FILE_TO_TRANSCRIBE}"
+  # Split the file name and extension
+  file_name, file_extension = os.path.splitext(FILE_TO_TRANSCRIBE)
 
-# Transcribe audio or video file
-result = model.transcribe(FILE_TO_TRANSCRIBE_WITH_FILE_PATH)
+  # Save the file name in a variable
+  transcription_file_name = f"{file_name}.txt"
 
-# Record the finish time
-finish_time = time.time()
+  # Transcribe audio or video file
+  result = model.transcribe(FILE_TO_TRANSCRIBE_WITH_FILE_PATH)
 
-# Calculate the duration
-duration = finish_time - start_time
+  # Record the finish time
+  finish_time = time.time()
 
-# Convert duration to minutes and seconds
-duration_formatted = str(timedelta(seconds=duration))
+  # Calculate the duration
+  duration = finish_time - start_time
 
-print("Transcription completed")
+  # Convert duration to minutes and seconds
+  duration_formatted = str(timedelta(seconds=duration))
 
-print(f"Finish Time: {time.strftime('%H:%M:%S', time.localtime(finish_time))}")
-print(f"Duration: {duration_formatted}")
+  print(f"Transcription completed for: {FILE_TO_TRANSCRIBE}")
 
-# Write the transcription to a text file
-with open(f"{TRANSCRIPTION_SAVE_LOCATION}/{transcription_file_name}", "w") as text_file:
-    text_file.write(result["text"])
+  print(f"Finish Time: {time.strftime('%H:%M:%S', time.localtime(finish_time))}")
+  print(f"Duration: {duration_formatted}")
+
+  # Write the transcription to a text file
+  with open(f"{TRANSCRIPTION_SAVE_LOCATION}/{transcription_file_name}", "w") as text_file:
+      text_file.write(result["text"])
